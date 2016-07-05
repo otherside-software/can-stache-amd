@@ -88,7 +88,7 @@ module.exports = function ( grunt ) {
 			bundleConfig[ modules[ i ].name ] = modules[ i ].include;
 		}
 
-		var contents = grunt.file.read( "Scripts-dist/" + requireConfig )
+		var contents = grunt.file.read( requireConfig )
 			+  "require.config({bundles: " + JSON.stringify( bundleConfig ) + "});";
 
 		grunt.file.write( "Scripts-dist/" + requireConfig, contents );
@@ -97,4 +97,5 @@ module.exports = function ( grunt ) {
 
   grunt.registerTask( "dev", [ "copy:requirejs" ]);
 	grunt.registerTask( "build", [ "copy:requirejs", "clean", "requirejs:build", "requirejsbundle:build", "cleanempty:build" ]);
+	grunt.registerTask( "default", "build" );
 }
