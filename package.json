@@ -1,0 +1,31 @@
+{
+  "name": "can-stache-amd",
+  "version": "1.0.0",
+  "description": "An AMD plugin loader for [canjs](https://github.com/bitovi/canjs) stache templates.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Empirion/can-stache-amd"
+  },
+  "author": "gsmeets",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Empirion/can-stache-amd/issues"
+  },
+  "homepage": "https://github.com/Empirion/can-stache-amd",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+		"grunt-cleanempty": "^1.0.1",
+		"grunt-contrib-copy": "^0.7.0",
+		"grunt-contrib-clean": "^0.6.0",
+		"grunt-contrib-requirejs": "^0.4.4"
+  },
+  "dependencies" : {
+    "can": "^2.3.24",
+    "requirejs": "^2.2.0",
+    "jquery": "^2.2.4"
+  }
+}

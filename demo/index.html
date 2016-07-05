@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script src="require.js"></script>
+    <script src="require.config.js"></script>
+  </head>
+  <body>
+    <script>
+    require([
+      "require",
+      "jquery",
+      "can",
+      "testcomponent"
+    ], function ( require, $, can ) {
+        "use strict";
+
+        var renderer = can.stache( "<test-component />" );
+        can.$( "body" ).append( renderer())
+    });
+    </script>
+  </body>
+</html>

@@ -1,8 +1,8 @@
-﻿define([ "module" ], function ( module ) {
+define([ "module" ], function ( module ) {
 	return {
 		version: "2.0.0",
 		load: function ( name, require, onload, config ) {
-			require([ "can", "can/view/stache" ], function ( can ) {
+			require([ "can", "canstache" ], function ( can ) {
 				var id = can.view.toId( name );
 				can.ajax({
 					url: require.toUrl( name ),

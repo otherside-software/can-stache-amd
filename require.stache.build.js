@@ -1,4 +1,4 @@
-﻿define([], function () {
+define([], function () {
 	var buildMap = {},
 		buildRequire = require.config({
 			context: "__build",
@@ -40,10 +40,10 @@
 	}
 
 	function getPartials( data, prefix ) {
-		function fill( _, match ) { 
+		function fill( _, match ) {
 			partials.push( match );
 		};
-  
+
 		var partials = [], regex = new RegExp(/{{>(.+?)}}/g);
 		data.replace( regex, fill );
 
@@ -61,14 +61,15 @@
 	return {
 		version: "2.0.0",
 		load: function ( name, require, onload, config ) {
-			var	getIntermediateAndImports = buildRequire( "lib/can/view/intermediate_and_imports" ),
+			var	getIntermediateAndImports = buildRequire( "can/view/intermediate_and_imports" ),
 				data = getFile( name ),
-				partials = getPartials( data, config.map["*"]["stache"]);
+				partials = getPartials( data, config.map["*"]["stache"]),
+				imports = getIntermediateAndImports( data ).imports;
 
-			buildMap[ name ] = { 
+			buildMap[ name ] = {
 				id: can.view.toId( name ),
-				template: data, 
-				imports: getIntermediateAndImports( data ).imports,
+				template: data,
+				imports: imports,
 				partials: partials
 			};
 
@@ -76,6 +77,12 @@
 				// force the partials to become part of the build
 				require( partials[ i ]);
 			}
+
+			for( var i in imports ) {
+				// force the imports to become part of the build
+				require( "faux!" + imports[ i ]);
+			}
+
 			onload();
 		},
 
@@ -93,8 +100,8 @@
 					.join( ", " );
 
 				write.asModule(
-					plugin + "!" + module, 
-					"define([ " + deps + " ], function ( can ) {\n  return can.stache( '" + data.id + "', '" + esc( data.template ) + "' )\n" + "});\n" 
+					plugin + "!" + module,
+					"define([ " + deps + " ], function ( can ) {\n  return can.stache( '" + data.id + "', '" + esc( data.template ) + "' )\n" + "});\n"
 				);
 			}
 		}
